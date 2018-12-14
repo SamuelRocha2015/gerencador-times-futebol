@@ -1,7 +1,6 @@
 package br.com.codenatio.desafio.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.math.BigDecimal;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 public class Jogador {
 
     @Id
-    @GeneratedValue
     private Long id;
     private String nome;
     private LocalDate dataNascimento;

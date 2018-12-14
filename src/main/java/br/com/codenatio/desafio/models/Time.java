@@ -1,7 +1,6 @@
 package br.com.codenatio.desafio.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 public class Time {
 
     @Id
-    @GeneratedValue
     private Long id;
     private String nome;
     private LocalDate dataCriacao;
