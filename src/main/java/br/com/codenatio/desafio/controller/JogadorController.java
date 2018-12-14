@@ -26,4 +26,10 @@ public class JogadorController {
         service.incluirJogador(jogador.getId(), jogador.getTime().getId(), jogador.getNome(), jogador.getDataNascimento(),
                 jogador.getNivelHabilidade(), jogador.getSalario());
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addCapitao(@PathVariable String id){
+        service.definirCapitao(Long.valueOf(id));
+    }
 }

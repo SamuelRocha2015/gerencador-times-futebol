@@ -1,5 +1,6 @@
 package br.com.codenatio.desafio.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -17,6 +18,8 @@ public class Jogador {
     private BigDecimal salario;
     @OneToOne
     private Time time;
+    @Column(name = "is_capitao")
+    private boolean isCapitao;
 
     public Long getId() {
         return id;
@@ -64,5 +67,13 @@ public class Jogador {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public boolean isCapitao() {
+        return isCapitao;
+    }
+
+    public void setCapitao(boolean capitao) {
+        isCapitao = capitao;
     }
 }

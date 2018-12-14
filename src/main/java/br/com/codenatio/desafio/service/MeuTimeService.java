@@ -1,6 +1,8 @@
 package br.com.codenatio.desafio.service;
 
 import br.com.codenatio.desafio.exceptions.IdentificadorUtilizadoException;
+import br.com.codenatio.desafio.exceptions.JogadorNaoEncontradoException;
+import br.com.codenatio.desafio.exceptions.TimeNaoEncontradoException;
 import br.com.codenatio.desafio.models.Jogador;
 import br.com.codenatio.desafio.models.Time;
 import br.com.codenatio.desafio.reositories.JogadorRepository;
@@ -8,6 +10,7 @@ import br.com.codenatio.desafio.reositories.TimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -53,8 +56,10 @@ public class MeuTimeService implements MeuTimeInterface {
             throw new IdentificadorUtilizadoException();
         }
 
-        Time time = new Time();
-        time.setId(id);
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if(!timeById.isPresent()){
+            throw new TimeNaoEncontradoException();
+        }
 
         Jogador novo = new Jogador();
         novo.setId(id);
@@ -62,14 +67,33 @@ public class MeuTimeService implements MeuTimeInterface {
         novo.setDataNascimento(dataNascimento);
         novo.setNivelHabilidade(nivelHabilidade);
         novo.setSalario(salario);
-        novo.setTime(time);
+        novo.setTime(timeById.get());
 
         jogadorRepository.save(novo);
 
     }
 
     @Override
+    @Transactional
     public void definirCapitao(Long idJogador) {
+
+        Optional<Jogador> byId = jogadorRepository.findById(idJogador);
+        if(byId.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+//        Optional<Jogador> antigoCapitao = jogadorRepository.findByCapitao();
+//        if(antigoCapitao .isPresent()){
+//            Jogador antigoCap = antigoCapitao.get();
+//            antigoCap.setCapitao(false);
+//            jogadorRepository.save(antigoCap);
+//        }
+
+
+        Jogador jogador = byId.get();
+        jogador.setCapitao(true);
+
+        jogadorRepository.save(jogador);
 
     }
 
