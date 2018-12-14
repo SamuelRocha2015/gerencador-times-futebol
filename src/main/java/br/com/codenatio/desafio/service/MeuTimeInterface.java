@@ -1,4 +1,4 @@
-package br.com.codenatio.desafio.models;
+package br.com.codenatio.desafio.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
