@@ -78,16 +78,16 @@ public class MeuTimeService implements MeuTimeInterface {
     public void definirCapitao(Long idJogador) {
 
         Optional<Jogador> byId = jogadorRepository.findById(idJogador);
-        if(byId.isPresent()){
+        if(!byId.isPresent()){
             throw new JogadorNaoEncontradoException();
         }
 
-//        Optional<Jogador> antigoCapitao = jogadorRepository.findByCapitao();
-//        if(antigoCapitao .isPresent()){
-//            Jogador antigoCap = antigoCapitao.get();
-//            antigoCap.setCapitao(false);
-//            jogadorRepository.save(antigoCap);
-//        }
+        Optional<Jogador> antigoCapitao = jogadorRepository.findByCapitao();
+         if(antigoCapitao .isPresent()){
+            Jogador antigoCap = antigoCapitao.get();
+            antigoCap.setCapitao(false);
+            jogadorRepository.save(antigoCap);
+        }
 
 
         Jogador jogador = byId.get();
