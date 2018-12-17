@@ -107,7 +107,7 @@ public class MeuTimeService implements MeuTimeInterface {
             throw new TimeNaoEncontradoException();
         }
 
-        Optional<Jogador> capitaoTime = jogadorRepository.findAllByIdTime(idTime);
+        Optional<Jogador> capitaoTime = jogadorRepository.findCapitaoByIdTime(idTime);
         if(!capitaoTime.isPresent()){
             throw new CapitaoNaoInformadoException();
         }
@@ -138,17 +138,22 @@ public class MeuTimeService implements MeuTimeInterface {
     }
 
     @Override
+    public List<Long> buscarJogadoresDoTime(Long idTime) {
+        Optional<List<Long>> allByIdTime = jogadorRepository.findAllByIdTime(idTime);
+        if(!allByIdTime.isPresent()) {
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return allByIdTime.get();
+    }
+
+    @Override
     public Long buscarJogadorMaiorSalario(Long idTime) {
         return null;
     }
 
     @Override
     public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-        return null;
-    }
-
-    @Override
-    public List<Long> buscarJogadoresDoTime(Long idTime) {
         return null;
     }
 

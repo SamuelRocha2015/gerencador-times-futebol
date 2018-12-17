@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/meu-time")
@@ -57,6 +58,13 @@ public class MeuTimeController {
     @ResponseStatus(HttpStatus.OK)
     public String buscarNomeTime(@PathVariable String idTime){
         return service.buscarNomeTime (Long.valueOf(idTime));
+    }
+
+
+    @GetMapping("/jogadores/{idTime}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> buscarJogadoresDoTime(@PathVariable String idTime){
+        return service.buscarJogadoresDoTime (Long.valueOf(idTime));
     }
 
 
