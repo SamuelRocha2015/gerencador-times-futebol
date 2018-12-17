@@ -117,12 +117,24 @@ public class MeuTimeService implements MeuTimeInterface {
 
     @Override
     public String buscarNomeJogador(Long idJogador) {
-        return null;
+
+        Optional<Jogador> jogadorById = jogadorRepository.findById(idJogador);
+        if(!jogadorById.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return jogadorById.get().getNome();
     }
 
     @Override
     public String buscarNomeTime(Long idTime) {
-        return null;
+
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if(!timeById.isPresent()){
+            throw new TimeNaoEncontradoException();
+        }
+
+        return timeById.get().getNome();
     }
 
     @Override

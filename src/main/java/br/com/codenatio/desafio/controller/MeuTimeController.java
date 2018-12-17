@@ -47,4 +47,17 @@ public class MeuTimeController {
         return service.buscarCapitaoDoTime(Long.valueOf(idTime));
     }
 
+    @GetMapping("/jogador/{idJogador}")
+    @ResponseStatus(HttpStatus.OK)
+    public String buscarNomeJogador(@PathVariable String idJogador){
+        return service.buscarNomeJogador(Long.valueOf(idJogador));
+    }
+
+    @GetMapping("/time/{idTime}")
+    @ResponseStatus(HttpStatus.OK)
+    public String buscarNomeTime(@PathVariable String idTime){
+        return service.buscarNomeTime (Long.valueOf(idTime));
+    }
+
+
 }
