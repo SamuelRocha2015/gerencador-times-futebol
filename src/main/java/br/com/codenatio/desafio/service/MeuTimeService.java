@@ -148,17 +148,27 @@ public class MeuTimeService implements MeuTimeInterface {
     }
 
     @Override
+    public Long buscarMelhorJogadorDoTime(Long idTime) {
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if(!timeById.isPresent()){
+            throw new TimeNaoEncontradoException();
+        }
+
+        Optional<Jogador> jogadorMaiorSalarioByIdTime = jogadorRepository.findJogadorMaiorSalarioByIdTime(idTime);
+        if(!jogadorMaiorSalarioByIdTime.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return jogadorMaiorSalarioByIdTime.get().getId();
+    }
+
+    @Override
     public Long buscarJogadorMaiorSalario(Long idTime) {
         return null;
     }
 
     @Override
     public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-        return null;
-    }
-
-    @Override
-    public Long buscarMelhorJogadorDoTime(Long idTime) {
         return null;
     }
 

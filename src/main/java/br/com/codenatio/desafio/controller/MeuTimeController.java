@@ -67,5 +67,11 @@ public class MeuTimeController {
         return service.buscarJogadoresDoTime (Long.valueOf(idTime));
     }
 
+    @GetMapping("/melhor-jogador/{idTime}")
+    @ResponseStatus(HttpStatus.OK)
+    public Long buscarMelhorJogadorDoTime(@PathVariable String idTime){
+        return service.buscarMelhorJogadorDoTime(Long.valueOf(idTime));
+    }
+
 
 }
