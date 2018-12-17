@@ -1,5 +1,6 @@
 package br.com.codenatio.desafio.service;
 
+import br.com.codenatio.desafio.exceptions.CapitaoNaoInformadoException;
 import br.com.codenatio.desafio.exceptions.IdentificadorUtilizadoException;
 import br.com.codenatio.desafio.exceptions.JogadorNaoEncontradoException;
 import br.com.codenatio.desafio.exceptions.TimeNaoEncontradoException;
@@ -98,8 +99,20 @@ public class MeuTimeService implements MeuTimeInterface {
     }
 
     @Override
+    @Transactional
     public Long buscarCapitaoDoTime(Long idTime) {
-        return null;
+
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if(!timeById.isPresent()){
+            throw new TimeNaoEncontradoException();
+        }
+
+        Optional<Jogador> capitaoTime = jogadorRepository.findAllByIdTime(idTime);
+        if(!capitaoTime.isPresent()){
+            throw new CapitaoNaoInformadoException();
+        }
+
+        return capitaoTime.get().getId();
     }
 
     @Override
