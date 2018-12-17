@@ -131,7 +131,7 @@ public class MeuTimeService implements MeuTimeInterface {
     }
 
     @Override
-    public BigDecimal buscarSalarioDoJogaodor(Long idJogador) {
+    public BigDecimal buscarSalarioDoJogador(Long idJogador) {
         return null;
     }
 

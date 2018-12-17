@@ -28,7 +28,7 @@ public interface MeuTimeInterface {
     public Long buscarJogadorMaiorSalario(Long idTime);
 
     @Desafio("buscarSalarioDoJogador")
-    public BigDecimal buscarSalarioDoJogaodor(Long idJogador);
+    public BigDecimal buscarSalarioDoJogador(Long idJogador);
 
     @Desafio("buscarJogadoresDoTime")
     public List<Long> buscarJogadoresDoTime(Long idTime);
