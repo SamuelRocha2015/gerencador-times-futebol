@@ -27,4 +27,12 @@ public interface JogadorRepository  extends CrudRepository<Jogador, Long> {
             nativeQuery = true)
     Optional<Jogador> findJogadorMaiorSalarioByIdTime(Long idTime);
 
+    @Query( value =  "SELECT * FROM JOGADOR WHERE  ID = (SELECT MAX(ID)  FROM JOGADOR WHERE  TIME_ID = ?1)",
+            nativeQuery = true)
+    Optional<Jogador> findJogadrMaisVelho(Long idTime);
+
+    @Query( value =  "SELECT * FROM JOGADOR WHERE  SALARIO = (SELECT MAX(SALARIO) FROM JOGADOR) AND TIME_ID = ?1",
+           nativeQuery = true)
+    Optional<Jogador> findByMaxSalarioAndTimeId(Long idTime);
+
 }

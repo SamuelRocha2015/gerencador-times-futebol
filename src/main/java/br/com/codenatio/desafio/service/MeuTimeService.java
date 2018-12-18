@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -163,22 +164,51 @@ public class MeuTimeService implements MeuTimeInterface {
     }
 
     @Override
+    public Long buscarJogadorMaisVelho(Long idTime) {
+
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if (!timeById.isPresent()) {
+            throw new TimeNaoEncontradoException();
+        }
+
+        Optional<Jogador> jogadorMaisVelho = jogadorRepository.findJogadrMaisVelho(idTime);
+
+        if(!jogadorMaisVelho.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return jogadorMaisVelho.get().getId();
+    }
+
+
+    @Override
+    public List<Long> buscarTimes() {
+        List<Long> ids = new ArrayList<>();
+        Iterable<Time> all = timeRepository.findAll();
+        all.forEach(a->ids.add(a.getId()));
+        return ids;
+    }
+
+
+    @Override
+    @Transactional
     public Long buscarJogadorMaiorSalario(Long idTime) {
-        return null;
+        Optional<Time> timeById = timeRepository.findById(idTime);
+        if (!timeById.isPresent()) {
+            throw new TimeNaoEncontradoException();
+        }
+
+        Optional<Jogador> jogadorMaiorSalario = jogadorRepository.findByMaxSalarioAndTimeId(idTime);
+
+        if(!jogadorMaiorSalario.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return jogadorMaiorSalario.get().getId();
     }
 
     @Override
     public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-        return null;
-    }
-
-    @Override
-    public Long buscarJogadorMaisVelho(Long idTime) {
-        return null;
-    }
-
-    @Override
-    public List<Long> buscarTimes() {
         return null;
     }
 

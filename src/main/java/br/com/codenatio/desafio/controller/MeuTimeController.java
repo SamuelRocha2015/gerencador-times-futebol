@@ -73,5 +73,22 @@ public class MeuTimeController {
         return service.buscarMelhorJogadorDoTime(Long.valueOf(idTime));
     }
 
+    @GetMapping("/jogador-mais-velho/{idTime}")
+    @ResponseStatus(HttpStatus.OK)
+    public Long buscarJogadorMaisVelho(@PathVariable String idTime){
+        return service.buscarJogadorMaisVelho(Long.valueOf(idTime));
+    }
+
+    @GetMapping("/times")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> buscarTimes(){
+        return service.buscarTimes();
+    }
+
+    @GetMapping("/jogador-maior-salario/{idTime}")
+    @ResponseStatus(HttpStatus.OK)
+    public Long buscarJogadorMaiorSalario(@PathVariable String idTime){
+        return service.buscarJogadorMaiorSalario(Long.valueOf(idTime));
+    }
 
 }
