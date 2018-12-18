@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -89,6 +90,12 @@ public class MeuTimeController {
     @ResponseStatus(HttpStatus.OK)
     public Long buscarJogadorMaiorSalario(@PathVariable String idTime){
         return service.buscarJogadorMaiorSalario(Long.valueOf(idTime));
+    }
+
+    @GetMapping("/busca-salario-jogador/{idJogador}")
+    @ResponseStatus(HttpStatus.OK)
+    public BigDecimal buscarSalarioDoJogador(@PathVariable String idJogador){
+        return service.buscarSalarioDoJogador(Long.valueOf(idJogador));
     }
 
 }

@@ -209,7 +209,13 @@ public class MeuTimeService implements MeuTimeInterface {
 
     @Override
     public BigDecimal buscarSalarioDoJogador(Long idJogador) {
-        return null;
+
+        Optional<Jogador> byId = jogadorRepository.findById(idJogador);
+        if(!byId.isPresent()){
+            throw new JogadorNaoEncontradoException();
+        }
+
+        return byId.get().getSalario();
     }
 
     @Override
